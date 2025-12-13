@@ -1,0 +1,1384 @@
+f
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Anushree Bhusari | Cybersecurity Portfolio</title>
+    <meta name="description" content="CEH Certified Cyber Security Test Engineer. Portfolio featuring red teaming, VAPT, security analytics, and digital forensics work." />
+
+    <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" />
+
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Fira+Code:wght@400;500;600&family=Inter:wght@300;400;500;600;700&display=swap');
+
+        :root {
+            --cyber-green: #00ff88;
+            --cyber-blue: #00d4ff;
+            --dark-bg: #0a0f1a;
+            --card-bg: #111827;
+        }
+
+        body {
+            font-family: 'Inter', sans-serif;
+            background: var(--dark-bg);
+        }
+
+        .font-mono {
+            font-family: 'Fira Code', monospace;
+        }
+
+        section {
+            scroll-margin-top: 92px;
+        }
+
+        :focus-visible {
+            outline: 2px solid rgba(0, 255, 136, 0.7);
+            outline-offset: 3px;
+            border-radius: 6px;
+        }
+
+        /* Matrix rain background */
+        #matrix-bg {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: -1;
+            opacity: 0.06;
+        }
+
+        /* Glowing text effect */
+        .glow-text {
+            text-shadow: 0 0 10px var(--cyber-green), 0 0 20px var(--cyber-green), 0 0 30px var(--cyber-green);
+        }
+
+        .glow-text-soft {
+            text-shadow: 0 0 6px rgba(0, 255, 136, 0.55), 0 0 14px rgba(0, 255, 136, 0.32);
+        }
+
+        .glow-blue {
+            text-shadow: 0 0 10px var(--cyber-blue), 0 0 20px var(--cyber-blue);
+        }
+
+        /* Cyber card styling */
+        .cyber-card {
+            background: linear-gradient(135deg, rgba(17, 24, 39, 0.9) 0%, rgba(10, 15, 26, 0.95) 100%);
+            border: 1px solid rgba(0, 255, 136, 0.18);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .cyber-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 2px;
+            background: linear-gradient(90deg, transparent, var(--cyber-green), transparent);
+            animation: scanline 3s linear infinite;
+        }
+
+        @keyframes scanline {
+            0% { left: -100%; }
+            100% { left: 100%; }
+        }
+
+        /* Terminal cursor blink */
+        .cursor {
+            animation: blink 1s step-end infinite;
+        }
+
+        @keyframes blink {
+            50% { opacity: 0; }
+        }
+
+        /* Navigation hover effect */
+        .nav-link {
+            position: relative;
+        }
+
+        .nav-link::after {
+            content: '';
+            position: absolute;
+            bottom: -2px;
+            left: 0;
+            width: 0;
+            height: 2px;
+            background: var(--cyber-green);
+            transition: width 0.3s ease;
+        }
+
+        .nav-link:hover::after {
+            width: 100%;
+        }
+
+        /* Scrollbar styling */
+        ::-webkit-scrollbar {
+            width: 8px;
+        }
+
+        ::-webkit-scrollbar-track {
+            background: var(--dark-bg);
+        }
+
+        ::-webkit-scrollbar-thumb {
+            background: var(--cyber-green);
+            border-radius: 4px;
+        }
+
+        /* Hex pattern background */
+        .hex-pattern {
+            background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='28' height='49' viewBox='0 0 28 49'%3E%3Cg fill-rule='evenodd'%3E%3Cg fill='%2300ff88' fill-opacity='0.03'%3E%3Cpath d='M13.99 9.25l13 7.5v15l-13 7.5L1 31.75v-15l12.99-7.5zM3 17.9v12.7l10.99 6.34 11-6.35V17.9l-11-6.34L3 17.9zM0 15l12.98-7.5V0h-2v6.35L0 12.69v2.3zm0 18.5L12.98 41v8h-2v-6.85L0 35.81v-2.3zM15 0v7.5L27.99 15H28v-2.31h-.01L17 6.35V0h-2zm0 49v-8l12.99-7.5H28v2.31h-.01L17 42.15V49h-2z'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E");
+        }
+
+        /* Reduce motion */
+        @media (prefers-reduced-motion: reduce) {
+            .cyber-card::before,
+            .cursor {
+                animation: none !important;
+            }
+        }
+
+        /* Print (Resume) */
+        #resume-printable {
+            display: none;
+        }
+
+        body.printing-resume {
+            background: #ffffff !important;
+        }
+
+        body.printing-resume #resume-printable {
+            display: block;
+            padding: 32px;
+        }
+
+        body.printing-resume #resume-printable,
+        body.printing-resume #resume-printable * {
+            background: transparent !important;
+            color: #000 !important;
+            text-shadow: none !important;
+            box-shadow: none !important;
+            border-color: #ddd !important;
+        }
+
+        body.printing-resume nav,
+        body.printing-resume #matrix-bg,
+        body.printing-resume section,
+        body.printing-resume footer,
+        body.printing-resume #project-modal,
+        body.printing-resume #resume-modal,
+        body.printing-resume #toast {
+            display: none !important;
+        }
+
+        /* Basic typography for print */
+        #resume-printable h1 {
+            font-size: 28px;
+            font-weight: 800;
+            margin: 0 0 6px;
+        }
+
+        #resume-printable .subhead {
+            font-size: 14px;
+            margin-bottom: 12px;
+        }
+
+        #resume-printable h2 {
+            font-size: 16px;
+            font-weight: 800;
+            margin: 18px 0 8px;
+        }
+
+        #resume-printable h3 {
+            font-size: 14px;
+            font-weight: 700;
+            margin: 10px 0 4px;
+        }
+
+        #resume-printable p {
+            margin: 0 0 8px;
+            line-height: 1.45;
+        }
+
+        #resume-printable ul {
+            margin: 0 0 10px 18px;
+            padding: 0;
+            list-style: disc;
+        }
+
+        #resume-printable li {
+            margin: 0 0 4px;
+        }
+
+        #resume-printable hr {
+            border: none;
+            border-top: 1px solid #ddd;
+            margin: 14px 0 12px;
+        }
+    </style>
+</head>
+
+<body class="text-gray-100 min-h-screen hex-pattern">
+    <canvas id="matrix-bg" aria-hidden="true"></canvas>
+
+    <!-- Navigation -->
+    <nav class="fixed top-0 w-full z-50 bg-opacity-90 backdrop-blur-md bg-[#0a0f1a] border-b border-green-500/20">
+        <div class="max-w-6xl mx-auto px-4 py-4 flex justify-between items-center">
+            <a href="#top" class="font-mono text-[#00ff88] text-xl font-semibold tracking-tight">
+                RedOpsByAnu.exe
+            </a>
+
+            <div class="hidden md:flex space-x-7 text-sm">
+                <a href="#about" class="nav-link text-gray-300 hover:text-[#00ff88] transition">About</a>
+                <a href="#skills" class="nav-link text-gray-300 hover:text-[#00ff88] transition">Skills</a>
+                <a href="#experience" class="nav-link text-gray-300 hover:text-[#00ff88] transition">Experience</a>
+                <a href="#education" class="nav-link text-gray-300 hover:text-[#00ff88] transition">Education</a>
+                <a href="#certifications" class="nav-link text-gray-300 hover:text-[#00ff88] transition">Certifications</a>
+                <a href="#projects" class="nav-link text-gray-300 hover:text-[#00ff88] transition">Projects</a>
+                <a href="#achievements" class="nav-link text-gray-300 hover:text-[#00ff88] transition">Achievements</a>
+                <a href="#contact" class="nav-link text-gray-300 hover:text-[#00ff88] transition">Contact</a>
+            </div>
+
+            <button id="mobile-menu-btn" class="md:hidden text-[#00ff88]" aria-label="Open menu" aria-controls="mobile-menu" aria-expanded="false">
+                <i class="fas fa-bars text-xl" aria-hidden="true"></i>
+            </button>
+        </div>
+
+        <!-- Mobile Menu -->
+        <div id="mobile-menu" class="hidden md:hidden bg-[#0a0f1a] border-t border-green-500/20">
+            <div class="px-4 py-3 space-y-2">
+                <a href="#about" class="block py-2 text-gray-300 hover:text-[#00ff88]">About</a>
+                <a href="#skills" class="block py-2 text-gray-300 hover:text-[#00ff88]">Skills</a>
+                <a href="#experience" class="block py-2 text-gray-300 hover:text-[#00ff88]">Experience</a>
+                <a href="#education" class="block py-2 text-gray-300 hover:text-[#00ff88]">Education</a>
+                <a href="#certifications" class="block py-2 text-gray-300 hover:text-[#00ff88]">Certifications</a>
+                <a href="#projects" class="block py-2 text-gray-300 hover:text-[#00ff88]">Projects</a>
+                <a href="#achievements" class="block py-2 text-gray-300 hover:text-[#00ff88]">Achievements</a>
+                <a href="#contact" class="block py-2 text-gray-300 hover:text-[#00ff88]">Contact</a>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <section id="top" class="min-h-screen flex items-center justify-center pt-16">
+        <div class="max-w-6xl mx-auto px-4 py-20 text-center">
+            <div class="mb-8">
+                <div class="w-40 h-40 mx-auto rounded-full border-4 border-[#00ff88] p-1 mb-8 relative">
+                    <div class="w-full h-full rounded-full bg-gray-800 flex items-center justify-center">
+                        <div class="text-center">
+                            <div class="font-mono text-5xl text-[#00ff88]">AB</div>
+                            <div class="text-xs text-gray-400 -mt-1">CEH</div>
+                        </div>
+                    </div>
+                    <div class="absolute -bottom-2 -right-2 bg-[#00ff88] text-black px-3 py-1 rounded-full text-sm font-semibold">
+                        <i class="fas fa-shield-halved mr-1" aria-hidden="true"></i> CEH
+                    </div>
+                </div>
+
+                <div class="font-mono text-[#00ff88] mb-3">
+                    <span class="text-gray-500">$</span> whoami
+                </div>
+
+                <h1 class="text-5xl md:text-7xl font-bold mb-3">
+                    <span class="text-white">Anushree</span> <span class="text-[#00ff88] glow-text-soft">Bhusari</span>
+                </h1>
+
+                <div class="font-mono text-lg md:text-2xl text-[#00d4ff] mb-6">
+                    <span id="typing-text"></span><span id="typing-cursor" class="cursor text-[#00ff88]">|</span>
+                </div>
+
+                <p class="text-gray-300/90 text-lg max-w-3xl mx-auto mb-10 leading-relaxed">
+                    CEH-certified Cyber Security Test Engineer with 2+ years of experience in Security Data Analytics and Digital Forensics—focused on Red Teaming and security testing across web, API, mobile, IoT, and network devices. Seeking opportunities to strengthen information technology defences.
+                </p>
+
+                <div class="flex flex-col sm:flex-row justify-center gap-4">
+                    <a href="#contact" class="bg-[#00ff88] text-black px-8 py-3 rounded font-semibold hover:bg-[#00d4ff] transition transform hover:scale-[1.02]">
+                        <i class="fas fa-envelope mr-2" aria-hidden="true"></i>Get In Touch
+                    </a>
+                    <a href="#projects" class="border border-[#00ff88] text-[#00ff88] px-8 py-3 rounded font-semibold hover:bg-[#00ff88]/10 transition">
+                        <i class="fas fa-folder-open mr-2" aria-hidden="true"></i>View Projects
+                    </a>
+                    <button id="open-resume" class="border border-[#00d4ff] text-[#00d4ff] px-8 py-3 rounded font-semibold hover:bg-[#00d4ff]/10 transition">
+                        <i class="fas fa-file-lines mr-2" aria-hidden="true"></i>Resume
+                    </button>
+                </div>
+
+                <div class="mt-12 flex justify-center space-x-6">
+                    <a href="https://www.linkedin.com/in/anushree-bhusari24" target="_blank" rel="noopener noreferrer" class="text-gray-400 hover:text-[#00ff88] transition text-2xl" aria-label="LinkedIn">
+                        <i class="fab fa-linkedin" aria-hidden="true"></i>
+                    </a>
+                    <a href="mailto:anushreebhusari24@gmail.com" class="text-gray-400 hover:text-[#00ff88] transition text-2xl" aria-label="Email">
+                        <i class="fas fa-envelope" aria-hidden="true"></i>
+                    </a>
+                </div>
+
+                <div class="mt-10 flex flex-wrap items-center justify-center gap-3 text-sm">
+                    <span class="px-3 py-1 rounded-full bg-white/5 border border-white/10 text-gray-200">
+                        <i class="fas fa-location-dot text-[#00ff88] mr-2" aria-hidden="true"></i>India
+                    </span>
+                    <span class="px-3 py-1 rounded-full bg-white/5 border border-white/10 text-gray-200">
+                        <i class="fas fa-user-shield text-[#00d4ff] mr-2" aria-hidden="true"></i>Cyber Security Test Engineer
+                    </span>
+                    <span class="px-3 py-1 rounded-full bg-white/5 border border-white/10 text-gray-200">
+                        <i class="fas fa-certificate text-[#00ff88] mr-2" aria-hidden="true"></i>CEH (EC-Council, 2025)
+                    </span>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- About Section -->
+    <section id="about" class="py-20">
+        <div class="max-w-6xl mx-auto px-4">
+            <div class="font-mono text-[#00ff88] mb-2">
+                <span class="text-gray-500">//</span> 01. About Me
+            </div>
+            <h2 class="text-4xl font-bold mb-12">Who Am I<span class="text-[#00ff88]">?</span></h2>
+
+            <div class="cyber-card rounded-lg p-8">
+                <div class="grid md:grid-cols-2 gap-10">
+                    <div>
+                        <div class="font-mono text-sm text-gray-500 mb-4">
+                            <span class="text-[#00ff88]">anushree@portfolio</span>:<span class="text-[#00d4ff]">~/about</span>$ cat profile.txt
+                        </div>
+                        <p class="text-gray-300 leading-relaxed mb-4">
+                            Cybersecurity professional with 2+ years of experience in Security Data Analytics and Digital Forensics. CEH-certified with hands-on exposure to threat detection, network analysis, and incident response.
+                        </p>
+                        <p class="text-gray-300 leading-relaxed mb-6">
+                            I currently work in Red Teaming and security testing, contributing to VAPT engagements across medical devices, mobile applications, and network devices. I enjoy finding vulnerabilities, validating impact, and translating technical findings into actionable remediation.
+                        </p>
+
+                        <div class="grid sm:grid-cols-2 gap-3">
+                            <div class="p-4 rounded-lg bg-white/5 border border-white/10">
+                                <div class="text-gray-400 text-xs mb-1">Focus Areas</div>
+                                <div class="text-white font-semibold">VAPT, Red Teaming, Device Security</div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="space-y-4">
+                        <div class="flex items-start space-x-4">
+                            <div class="w-12 h-12 bg-[#00ff88]/10 rounded-lg flex items-center justify-center shrink-0">
+                                <i class="fas fa-location-dot text-[#00ff88]" aria-hidden="true"></i>
+                            </div>
+                            <div>
+                                <div class="text-gray-500 text-sm">Location</div>
+                                <div class="text-white">India</div>
+                            </div>
+                        </div>
+
+                        <div class="flex items-start space-x-4">
+                            <div class="w-12 h-12 bg-[#00ff88]/10 rounded-lg flex items-center justify-center shrink-0">
+                                <i class="fas fa-briefcase text-[#00ff88]" aria-hidden="true"></i>
+                            </div>
+                            <div>
+                                <div class="text-gray-500 text-sm">Current Role</div>
+                                <div class="text-white">Test Engineer - Red Teaming</div>
+                            </div>
+                        </div>
+
+                        <div class="flex items-start space-x-4">
+                            <div class="w-12 h-12 bg-[#00ff88]/10 rounded-lg flex items-center justify-center shrink-0">
+                                <i class="fas fa-graduation-cap text-[#00ff88]" aria-hidden="true"></i>
+                            </div>
+                            <div>
+                                <div class="text-gray-500 text-sm">Highest Education</div>
+                                <div class="text-white">Master's in Cybersecurity</div>
+                            </div>
+                        </div>
+
+                        <div class="flex items-start space-x-4">
+                            <div class="w-12 h-12 bg-[#00ff88]/10 rounded-lg flex items-center justify-center shrink-0">
+                                <i class="fas fa-shield-halved text-[#00ff88]" aria-hidden="true"></i>
+                            </div>
+                            <div>
+                                <div class="text-gray-500 text-sm">Certification</div>
+                                <div class="text-white">Certified Ethical Hacker (CEH)</div>
+                            </div>
+                        </div>
+
+
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Skills Section -->
+    <section id="skills" class="py-20">
+        <div class="max-w-6xl mx-auto px-4">
+            <div class="font-mono text-[#00ff88] mb-2">
+                <span class="text-gray-500">//</span> 02. Technical Arsenal
+            </div>
+
+            <div class="flex flex-col lg:flex-row lg:items-end lg:justify-between gap-4 mb-12">
+                <h2 class="text-4xl font-bold">Skills & Tools<span class="text-[#00ff88]">_</span></h2>
+                <p class="text-gray-400 max-w-2xl">
+                    A focused snapshot of the tools and domains I work with across VAPT, device security testing, SIEM monitoring, and digital forensics.
+                </p>
+            </div>
+
+            <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
+                <!-- Card 1 -->
+                <div class="cyber-card rounded-lg p-6">
+                    <div class="flex items-center mb-4">
+                        <i class="fas fa-toolbox text-[#00ff88] text-2xl mr-3" aria-hidden="true"></i>
+                        <h3 class="text-xl font-semibold">Security Tools</h3>
+                    </div>
+                    <div class="flex flex-wrap gap-2">
+                        <span class="px-3 py-1 bg-[#00ff88]/10 text-[#00ff88] rounded text-sm">Burp Suite</span>
+                        <span class="px-3 py-1 bg-[#00ff88]/10 text-[#00ff88] rounded text-sm">Nessus</span>
+                        <span class="px-3 py-1 bg-[#00ff88]/10 text-[#00ff88] rounded text-sm">Defensics</span>
+                        <span class="px-3 py-1 bg-[#00ff88]/10 text-[#00ff88] rounded text-sm">Nmap</span>
+                        <span class="px-3 py-1 bg-[#00ff88]/10 text-[#00ff88] rounded text-sm">Wireshark</span>
+                        <span class="px-3 py-1 bg-[#00ff88]/10 text-[#00ff88] rounded text-sm">Metasploit</span>
+                        <span class="px-3 py-1 bg-[#00ff88]/10 text-[#00ff88] rounded text-sm">OWASP ZAP</span>
+                    </div>
+                </div>
+
+                <!-- Card 2 -->
+                <div class="cyber-card rounded-lg p-6">
+                    <div class="flex items-center mb-4">
+                        <i class="fas fa-microchip text-[#00d4ff] text-2xl mr-3" aria-hidden="true"></i>
+                        <h3 class="text-xl font-semibold">Security Testing</h3>
+                    </div>
+                    <div class="flex flex-wrap gap-2">
+                        <span class="px-3 py-1 bg-[#00d4ff]/10 text-[#00d4ff] rounded text-sm">Web & APIs</span>
+                        <span class="px-3 py-1 bg-[#00d4ff]/10 text-[#00d4ff] rounded text-sm">Network Devices</span>
+                        <span class="px-3 py-1 bg-[#00d4ff]/10 text-[#00d4ff] rounded text-sm">Medical Devices</span>
+                        <span class="px-3 py-1 bg-[#00d4ff]/10 text-[#00d4ff] rounded text-sm">Mobile Pen Testing</span>
+                        <span class="px-3 py-1 bg-[#00d4ff]/10 text-[#00d4ff] rounded text-sm">IoT Testing</span>
+                        <span class="px-3 py-1 bg-[#00d4ff]/10 text-[#00d4ff] rounded text-sm">Fuzzing</span>
+                    </div>
+                </div>
+
+                <!-- Card 3 -->
+                <div class="cyber-card rounded-lg p-6">
+                    <div class="flex items-center mb-4">
+                        <i class="fas fa-radar text-[#00ff88] text-2xl mr-3" aria-hidden="true"></i>
+                        <h3 class="text-xl font-semibold">SIEM & Monitoring</h3>
+                    </div>
+                    <div class="flex flex-wrap gap-2">
+                        <span class="px-3 py-1 bg-[#00ff88]/10 text-[#00ff88] rounded text-sm">IBM QRadar</span>
+                        <span class="px-3 py-1 bg-[#00ff88]/10 text-[#00ff88] rounded text-sm">Azure Sentinel (KQL)</span>
+                        <span class="px-3 py-1 bg-[#00ff88]/10 text-[#00ff88] rounded text-sm">QlikSense</span>
+                        <span class="px-3 py-1 bg-[#00ff88]/10 text-[#00ff88] rounded text-sm">Incident Response</span>
+                    </div>
+                </div>
+
+                <!-- Card 4 -->
+                <div class="cyber-card rounded-lg p-6">
+                    <div class="flex items-center mb-4">
+                        <i class="fas fa-network-wired text-[#00d4ff] text-2xl mr-3" aria-hidden="true"></i>
+                        <h3 class="text-xl font-semibold">Networking & Core</h3>
+                    </div>
+                    <div class="flex flex-wrap gap-2">
+                        <span class="px-3 py-1 bg-[#00d4ff]/10 text-[#00d4ff] rounded text-sm">TCP/IP</span>
+                        <span class="px-3 py-1 bg-[#00d4ff]/10 text-[#00d4ff] rounded text-sm">DNS</span>
+                        <span class="px-3 py-1 bg-[#00d4ff]/10 text-[#00d4ff] rounded text-sm">Firewalls</span>
+                        <span class="px-3 py-1 bg-[#00d4ff]/10 text-[#00d4ff] rounded text-sm">VPN</span>
+                        <span class="px-3 py-1 bg-[#00d4ff]/10 text-[#00d4ff] rounded text-sm">OSI</span>
+                    </div>
+                </div>
+
+                <!-- Card 5 -->
+                <div class="cyber-card rounded-lg p-6">
+                    <div class="flex items-center mb-4">
+                        <i class="fas fa-magnifying-glass text-[#00ff88] text-2xl mr-3" aria-hidden="true"></i>
+                        <h3 class="text-xl font-semibold">Digital Forensics</h3>
+                    </div>
+                    <div class="flex flex-wrap gap-2">
+                        <span class="px-3 py-1 bg-[#00ff88]/10 text-[#00ff88] rounded text-sm">Autopsy</span>
+                        <span class="px-3 py-1 bg-[#00ff88]/10 text-[#00ff88] rounded text-sm">ProDiscover</span>
+                        <span class="px-3 py-1 bg-[#00ff88]/10 text-[#00ff88] rounded text-sm">RecoverIt</span>
+                    </div>
+                </div>
+
+                <!-- Card 6 -->
+                <div class="cyber-card rounded-lg p-6">
+                    <div class="flex items-center mb-4">
+                        <i class="fas fa-user-shield text-purple-200 text-2xl mr-3" aria-hidden="true"></i>
+                        <h3 class="text-xl font-semibold">Professional Skills</h3>
+                    </div>
+                    <div class="flex flex-wrap gap-2">
+                        <span class="px-3 py-1 bg-purple-500/15 text-purple-200 rounded text-sm">Analytical Thinking</span>
+                        <span class="px-3 py-1 bg-purple-500/15 text-purple-200 rounded text-sm">Time Management</span>
+                        <span class="px-3 py-1 bg-purple-500/15 text-purple-200 rounded text-sm">Communication</span>
+                        <span class="px-3 py-1 bg-purple-500/15 text-purple-200 rounded text-sm">Presentation</span>
+                        <span class="px-3 py-1 bg-purple-500/15 text-purple-200 rounded text-sm">Critical Thinking</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Experience Section -->
+    <section id="experience" class="py-20">
+        <div class="max-w-6xl mx-auto px-4">
+            <div class="font-mono text-[#00ff88] mb-2">
+                <span class="text-gray-500">//</span> 03. Experience
+            </div>
+            <h2 class="text-4xl font-bold mb-12">Work History<span class="text-[#00ff88]">_</span></h2>
+
+            <div class="space-y-8">
+                <!-- Experience Item 1 -->
+                <div class="cyber-card rounded-lg p-6 border-l-4 border-[#00ff88]">
+                    <div class="flex flex-wrap justify-between items-start gap-3 mb-4">
+                        <div>
+                            <h3 class="text-xl font-semibold text-[#00ff88]">Test Engineer - Red Teaming</h3>
+                            <p class="text-[#00d4ff]">InTeleCyber Services</p>
+                        </div>
+                        <span class="font-mono text-gray-500 text-sm">Apr 2025 - Present</span>
+                    </div>
+                    <ul class="list-disc list-inside text-gray-300 space-y-2">
+                        <li>Completed 4+ security audits including VAPT for medical devices, mobile applications (IAS – UL 2900-2-1), and IP routers / Wi‑Fi CPEs (NCCS – ITSAR standards).</li>
+                        <li>Created and executed test plans to assess functionality, performance, and security of IoT and network devices.</li>
+                        <li>Discovered vulnerabilities in web apps, APIs, and embedded systems using Nessus, Burp Suite, Nmap, Wireshark, and OWASP ZAP.</li>
+                        <li>Conducted fuzzing tests on devices based on defined requirements.</li>
+                    </ul>
+                </div>
+
+                <!-- Experience Item 2 -->
+                <div class="cyber-card rounded-lg p-6 border-l-4 border-[#00d4ff]">
+                    <div class="flex flex-wrap justify-between items-start gap-3 mb-4">
+                        <div>
+                            <h3 class="text-xl font-semibold text-[#00d4ff]">Cyber Security Data Analyst</h3>
+                            <p class="text-[#00ff88]">SecurityHQ</p>
+                            <p class="text-gray-500 text-sm mt-1">Pune, India</p>
+                        </div>
+                        <span class="font-mono text-gray-500 text-sm">Jan 2022 - Jan 2023</span>
+                    </div>
+                    <ul class="list-disc list-inside text-gray-300 space-y-2">
+                        <li>Recognized as a <span class="text-white font-semibold">Top Performer</span> for two consecutive quarters through consistent initiatives and results.</li>
+                        <li>Configured IBM QRadar and Microsoft Azure Sentinel (SPL/KQL) for SIEM monitoring, incident analysis, and incident handling workflows.</li>
+                        <li>Developed and maintained dashboards using QlikView, Power BI, and MS Excel, improving EDR/MDR reporting efficiency by <span class="text-white font-semibold">40%</span> while maintaining 100% SLA/KPI adherence.</li>
+                        <li>Worked with cross-functional teams to improve incident response, reducing downtime by <span class="text-white font-semibold">25%</span>.</li>
+                    </ul>
+                </div>
+
+                <!-- Experience Item 3 -->
+                <div class="cyber-card rounded-lg p-6 border-l-4 border-amber-400/70">
+                    <div class="flex flex-wrap justify-between items-start gap-3 mb-4">
+                        <div>
+                            <h3 class="text-xl font-semibold text-amber-200">Ethical Hacking Summer Internship</h3>
+                            <p class="text-amber-300">Unisoft Technologies</p>
+                        </div>
+                        <span class="font-mono text-gray-500 text-sm">May 2021 - Nov 2021</span>
+                    </div>
+                    <ul class="list-disc list-inside text-gray-300 space-y-2">
+                        <li>Gained foundational exposure to ethical hacking concepts and common cybersecurity tools.</li>
+                        <li>Gained hands-on experience with tools such as Nmap for network scanning.</li>
+                        <li>Observed basic vulnerability scanning and network analysis using tools like Burp Suite and Wireshark.</li>
+                        <li>Learned OWASP Top 10 and general security best practices through guided tasks and documentation.</li>
+                    </ul>
+                </div>
+
+                <!-- Experience Item 4 -->
+                <div class="cyber-card rounded-lg p-6 border-l-4 border-purple-400/70">
+                    <div class="flex flex-wrap justify-between items-start gap-3 mb-4">
+                        <div>
+                            <h3 class="text-xl font-semibold text-purple-200">Cyber Forensic Analyst Trainee</h3>
+                            <p class="text-purple-300">FORnSEC Solutions</p>
+                            <p class="text-gray-500 text-sm mt-1">Nagpur, India</p>
+                        </div>
+                        <span class="font-mono text-gray-500 text-sm">Oct 2020 - Apr 2021</span>
+                    </div>
+                    <ul class="list-disc list-inside text-gray-300 space-y-2">
+                        <li>Investigated 25+ legal cases across government and private sectors (including murder, divorce litigation, and employment fraud) supporting evidence-based legal proceedings.</li>
+                        <li>Extracted and analyzed digital evidence using RecoverIt, Autopsy, and ProDiscover, improving investigation efficiency by <span class="text-white font-semibold">30%</span>.</li>
+                        <li>Maintained 100% evidence integrity through strict chain-of-custody practices, including cloud data preservation.</li>
+                        <li>Produced technical documentation aligned with forensic standards and regulatory guidelines.</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Education Section -->
+    <section id="education" class="py-20">
+        <div class="max-w-6xl mx-auto px-4">
+            <div class="font-mono text-[#00ff88] mb-2">
+                <span class="text-gray-500">//</span> 04. Education
+            </div>
+            <h2 class="text-4xl font-bold mb-12">Academic Background<span class="text-[#00ff88]">_</span></h2>
+
+            <div class="grid md:grid-cols-2 gap-6">
+                <div class="cyber-card rounded-lg p-6">
+                    <div class="flex items-start justify-between gap-4">
+                        <div>
+                            <h3 class="text-xl font-semibold text-[#00ff88]">Master's in Cybersecurity</h3>
+                            <p class="text-[#00d4ff]">Birmingham City University</p>
+                            <p class="text-gray-500 text-sm mt-1">Birmingham, United Kingdom</p>
+                        </div>
+                        <div class="font-mono text-gray-500 text-sm">01/2023 - 01/2024</div>
+                    </div>
+                    <div class="mt-4 text-gray-300">
+                        Focused on modern cybersecurity practices, risk assessment, and security engineering fundamentals.
+                    </div>
+                </div>
+
+                <div class="cyber-card rounded-lg p-6">
+                    <div class="flex items-start justify-between gap-4">
+                        <div>
+                            <h3 class="text-xl font-semibold text-[#00d4ff]">Bachelor of Engineering in Computer Science</h3>
+                            <p class="text-[#00ff88]">Priyadarshini College of Engineering</p>
+                            <p class="text-gray-500 text-sm mt-1">Nagpur, India</p>
+                        </div>
+                        <div class="font-mono text-gray-500 text-sm">06/2016 - 04/2020</div>
+                    </div>
+                    <div class="mt-4 text-gray-300">
+                        Built a strong foundation in computer science, programming, and systems concepts.
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Certifications Section -->
+    <section id="certifications" class="py-20">
+        <div class="max-w-6xl mx-auto px-4">
+            <div class="font-mono text-[#00ff88] mb-2">
+                <span class="text-gray-500">//</span> 05. Certifications
+            </div>
+            <h2 class="text-4xl font-bold mb-12">Credentials<span class="text-[#00ff88]">_</span></h2>
+
+            <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
+                <div class="cyber-card rounded-lg p-6 text-center hover:border-[#00ff88]/50 transition">
+                    <div class="w-16 h-16 mx-auto mb-4 bg-[#00ff88]/10 rounded-full flex items-center justify-center">
+                        <i class="fas fa-certificate text-[#00ff88] text-2xl" aria-hidden="true"></i>
+                    </div>
+                    <h3 class="text-lg font-semibold mb-2">Certified Ethical Hacker (CEH)</h3>
+                    <p class="text-gray-400 text-sm">EC-Council</p>
+                    <p class="text-[#00ff88] text-sm mt-2">2025</p>
+                    <p class="text-gray-500 text-xs mt-3 font-mono">Cred. ID: ECC3216487509</p>
+                </div>
+
+                <div class="cyber-card rounded-lg p-6 text-center hover:border-[#00d4ff]/50 transition">
+                    <div class="w-16 h-16 mx-auto mb-4 bg-[#00d4ff]/10 rounded-full flex items-center justify-center">
+                        <i class="fas fa-user-ninja text-[#00d4ff] text-2xl" aria-hidden="true"></i>
+                    </div>
+                    <h3 class="text-lg font-semibold mb-2">eJPT (Junior Penetration Tester)</h3>
+                    <p class="text-gray-400 text-sm">INE / eLearnSecurity</p>
+                    <p class="text-[#00d4ff] text-sm mt-2">Ongoing</p>
+                    <p class="text-gray-500 text-xs mt-3 font-mono">In progress</p>
+                </div>
+
+                <div class="cyber-card rounded-lg p-6 text-center border-dashed hover:border-[#00ff88]/50 transition">
+                    <div class="w-16 h-16 mx-auto mb-4 bg-gray-800 rounded-full flex items-center justify-center">
+                        <i class="fas fa-plus text-gray-600 text-2xl" aria-hidden="true"></i>
+                    </div>
+                    <h3 class="text-lg font-semibold mb-2 text-gray-600">Next Certification</h3>
+                    <p class="text-gray-600 text-sm">Add more credentials anytime.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Projects Section -->
+    <section id="projects" class="py-20">
+        <div class="max-w-6xl mx-auto px-4">
+            <div class="font-mono text-[#00ff88] mb-2">
+                <span class="text-gray-500">//</span> 06. Projects
+            </div>
+            <h2 class="text-4xl font-bold mb-12">Featured Work<span class="text-[#00ff88]">_</span></h2>
+
+            <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
+                <!-- Project 1 -->
+                <div class="cyber-card rounded-lg overflow-hidden group">
+                    <div class="h-44 bg-gradient-to-br from-[#00ff88]/20 to-[#00d4ff]/20 flex items-center justify-center">
+                        <i class="fas fa-sitemap text-6xl text-[#00ff88]/50 group-hover:text-[#00ff88] transition" aria-hidden="true"></i>
+                    </div>
+                    <div class="p-6">
+                        <h3 class="text-xl font-semibold mb-2">Enterprise Application Pentest</h3>
+                        <p class="text-gray-400 mb-4">Comprehensive VAPT for an OEM enterprise application with multiple critical findings across app and network layers.</p>
+                        <div class="flex flex-wrap gap-2 mb-5">
+                            <span class="px-2 py-1 bg-[#00ff88]/10 text-[#00ff88] rounded text-xs">XSS</span>
+                            <span class="px-2 py-1 bg-[#00ff88]/10 text-[#00ff88] rounded text-xs">Command Injection</span>
+                            <span class="px-2 py-1 bg-[#00ff88]/10 text-[#00ff88] rounded text-xs">Privilege Escalation</span>
+                        </div>
+                        <button class="project-details text-[#00d4ff] hover:text-[#00ff88] transition" data-project="enterprise">
+                            <i class="fas fa-circle-info mr-1" aria-hidden="true"></i>Details
+                        </button>
+                    </div>
+                </div>
+
+                <!-- Project 2 -->
+                <div class="cyber-card rounded-lg overflow-hidden group">
+                    <div class="h-44 bg-gradient-to-br from-[#00d4ff]/20 to-[#00ff88]/20 flex items-center justify-center">
+                        <i class="fas fa-mobile-screen-button text-6xl text-[#00d4ff]/50 group-hover:text-[#00d4ff] transition" aria-hidden="true"></i>
+                    </div>
+                    <div class="p-6">
+                        <h3 class="text-xl font-semibold mb-2">Mobile App Security (Android)</h3>
+                        <p class="text-gray-400 mb-4">Security assessment of an Android app for an ECG medical device; validated secure storage and cryptographic risks.</p>
+                        <div class="flex flex-wrap gap-2 mb-5">
+                            <span class="px-2 py-1 bg-[#00d4ff]/10 text-[#00d4ff] rounded text-xs">Insecure Storage</span>
+                            <span class="px-2 py-1 bg-[#00d4ff]/10 text-[#00d4ff] rounded text-xs">Insecure Crypto</span>
+                            <span class="px-2 py-1 bg-[#00d4ff]/10 text-[#00d4ff] rounded text-xs">Medical Device</span>
+                        </div>
+                        <button class="project-details text-[#00d4ff] hover:text-[#00ff88] transition" data-project="mobile">
+                            <i class="fas fa-circle-info mr-1" aria-hidden="true"></i>Details
+                        </button>
+                    </div>
+                </div>
+
+                <!-- Project 3 -->
+                <div class="cyber-card rounded-lg overflow-hidden group">
+                    <div class="h-44 bg-gradient-to-br from-purple-500/15 to-[#00d4ff]/15 flex items-center justify-center">
+                        <i class="fas fa-network-wired text-6xl text-purple-200/50 group-hover:text-purple-200 transition" aria-hidden="true"></i>
+                    </div>
+                    <div class="p-6">
+                        <h3 class="text-xl font-semibold mb-2">IoT Privacy Risk Assessment (NIST CSF)</h3>
+                        <p class="text-gray-400 mb-4">Built a framework to assess IoT privacy risk, with traffic analysis to validate exposure and policy gaps.</p>
+                        <div class="flex flex-wrap gap-2 mb-5">
+                            <span class="px-2 py-1 bg-purple-500/15 text-purple-200 rounded text-xs">NIST CSF</span>
+                            <span class="px-2 py-1 bg-purple-500/15 text-purple-200 rounded text-xs">Wireshark</span>
+                            <span class="px-2 py-1 bg-purple-500/15 text-purple-200 rounded text-xs">Risk Framework</span>
+                        </div>
+                        <button class="project-details text-[#00d4ff] hover:text-[#00ff88] transition" data-project="iot">
+                            <i class="fas fa-circle-info mr-1" aria-hidden="true"></i>Details
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Achievements Section -->
+    <section id="achievements" class="py-20">
+        <div class="max-w-6xl mx-auto px-4">
+            <div class="font-mono text-[#00ff88] mb-2">
+                <span class="text-gray-500">//</span> 07. Achievements
+            </div>
+            <h2 class="text-4xl font-bold mb-12">Highlights<span class="text-[#00ff88]">_</span></h2>
+
+            <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
+                <div class="cyber-card rounded-lg p-6">
+                    <div class="w-12 h-12 bg-[#00ff88]/10 rounded-lg flex items-center justify-center mb-4">
+                        <i class="fas fa-star text-[#00ff88]" aria-hidden="true"></i>
+                    </div>
+                    <h3 class="text-lg font-semibold mb-2">Excellence in Performance</h3>
+                    <p class="text-gray-300">Recognized as a Top Performer for two consecutive quarters for driving 20%+ improvement in security operations efficiency and consistently exceeding benchmarks.</p>
+                </div>
+
+                <div class="cyber-card rounded-lg p-6">
+                    <div class="w-12 h-12 bg-[#00d4ff]/10 rounded-lg flex items-center justify-center mb-4">
+                        <i class="fas fa-people-group text-[#00d4ff]" aria-hidden="true"></i>
+                    </div>
+                    <h3 class="text-lg font-semibold mb-2">VP, Entrepreneurship Development Cell</h3>
+                    <p class="text-gray-300">Selected as Vice President through a competitive interview process among 50+ candidates from diverse academic backgrounds.</p>
+                </div>
+
+                <div class="cyber-card rounded-lg p-6">
+                    <div class="w-12 h-12 bg-purple-500/15 rounded-lg flex items-center justify-center mb-4">
+                        <i class="fas fa-lightbulb text-purple-200" aria-hidden="true"></i>
+                    </div>
+                    <h3 class="text-lg font-semibold mb-2">Leadership & Professional Growth</h3>
+                    <p class="text-gray-300">Designed workshops and networking events supporting strategic thinking, teamwork, interpersonal skills, and continuous improvement.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Contact Section -->
+    <section id="contact" class="py-20">
+        <div class="max-w-6xl mx-auto px-4">
+            <div class="font-mono text-[#00ff88] mb-2">
+                <span class="text-gray-500">//</span> 08. Contact
+            </div>
+            <h2 class="text-4xl font-bold mb-12">Get In Touch<span class="text-[#00ff88]">_</span></h2>
+
+            <div class="cyber-card rounded-lg p-8 max-w-2xl mx-auto text-center">
+                <div class="font-mono text-gray-500 mb-6">
+                    <span class="text-[#00ff88]">$</span> ./establish_connection.sh
+                </div>
+
+                <p class="text-gray-300 mb-8">
+                    Interested in Red Teaming, VAPT, security testing, or security analytics work? I’m open to opportunities and collaborations.
+                </p>
+
+                <div class="space-y-4 mb-8">
+                    <div class="flex flex-col sm:flex-row items-center justify-center gap-3">
+                        <a href="mailto:anushreebhusari24@gmail.com" class="flex items-center justify-center space-x-3 text-gray-300 hover:text-[#00ff88] transition">
+                            <i class="fas fa-envelope text-[#00ff88]" aria-hidden="true"></i>
+                            <span id="email-text">anushreebhusari24@gmail.com</span>
+                        </a>
+                        <button id="copy-email" class="px-3 py-1.5 rounded border border-[#00ff88]/40 text-[#00ff88] hover:bg-[#00ff88]/10 transition text-sm">
+                            <i class="fas fa-copy mr-2" aria-hidden="true"></i>Copy
+                        </button>
+                    </div>
+
+                    <a href="https://www.linkedin.com/in/anushree-bhusari24" target="_blank" rel="noopener noreferrer" class="flex items-center justify-center space-x-3 text-gray-300 hover:text-[#00ff88] transition">
+                        <i class="fab fa-linkedin text-[#00ff88]" aria-hidden="true"></i>
+                        <span>linkedin.com/in/anushree-bhusari24</span>
+                    </a>
+
+                    <div class="flex items-center justify-center space-x-3 text-gray-400">
+                        <i class="fas fa-location-dot text-[#00ff88]" aria-hidden="true"></i>
+                        <span>India</span>
+                    </div>
+                </div>
+
+                <a href="mailto:anushreebhusari24@gmail.com" class="inline-block bg-[#00ff88] text-black px-8 py-3 rounded font-semibold hover:bg-[#00d4ff] transition transform hover:scale-[1.02]">
+                    <i class="fas fa-paper-plane mr-2" aria-hidden="true"></i>Send Message
+                </a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="py-8 border-t border-green-500/20">
+        <div class="max-w-6xl mx-auto px-4 text-center">
+            <div class="font-mono text-gray-500 text-sm">
+                Built with <i class="fas fa-shield-halved text-[#00ff88]" aria-hidden="true"></i> by <span class="text-gray-200">Anushree Bhusari</span>
+            </div>
+            <div class="text-gray-600 text-sm mt-2">© <span id="year"></span> All rights reserved.</div>
+
+        </div>
+    </footer>
+
+    <!-- Resume Modal -->
+    <div id="resume-modal" class="fixed inset-0 z-[60] hidden" role="dialog" aria-modal="true" aria-label="Resume">
+        <div id="resume-modal-overlay" class="absolute inset-0 bg-black/70"></div>
+        <div class="relative max-w-4xl mx-auto mt-24 sm:mt-28 px-4">
+            <div class="cyber-card rounded-lg p-6 sm:p-7">
+                <div class="flex items-start justify-between gap-4">
+                    <div>
+                        <div class="font-mono text-sm text-gray-500 mb-2">
+                            <span class="text-[#00ff88]">anushree@portfolio</span>:<span class="text-[#00d4ff]">~/</span>$ cat resume.txt
+                        </div>
+                        <h3 class="text-2xl font-bold">Anushree Bhusari</h3>
+                        <p class="text-gray-300 mt-1">CEH Certified | Cyber Security Test Engineer</p>
+                        <div class="mt-3 flex flex-wrap gap-3 text-sm">
+                            <a href="mailto:anushreebhusari24@gmail.com" class="text-gray-400 hover:text-[#00ff88] transition">
+                                <i class="fas fa-envelope mr-2" aria-hidden="true"></i>anushreebhusari24@gmail.com
+                            </a>
+                            <a href="https://www.linkedin.com/in/anushree-bhusari24" target="_blank" rel="noopener noreferrer" class="text-gray-400 hover:text-[#00ff88] transition">
+                                <i class="fab fa-linkedin mr-2" aria-hidden="true"></i>linkedin.com/in/anushree-bhusari24
+                            </a>
+                            <span class="text-gray-500">
+                                <i class="fas fa-location-dot mr-2 text-[#00ff88]" aria-hidden="true"></i>India
+                            </span>
+                        </div>
+                    </div>
+                    <button id="resume-modal-close" class="text-gray-300 hover:text-[#00ff88] transition" aria-label="Close">
+                        <i class="fas fa-xmark text-xl" aria-hidden="true"></i>
+                    </button>
+                </div>
+
+                <div class="mt-6 grid lg:grid-cols-3 gap-6">
+                    <div class="lg:col-span-2 space-y-6">
+                        <div>
+                            <div class="font-mono text-[#00ff88] text-sm mb-2"><span class="text-gray-500">//</span> Summary</div>
+                            <p class="text-gray-300 leading-relaxed">
+                                Cybersecurity professional with 1.5 years of experience in Security Data Analytics and Digital Forensics. CEH-certified with expertise in threat detection, network analysis, and incident response. Seeking opportunities to apply my skills and strengthen information technology defences.
+                            </p>
+                        </div>
+
+                        <div>
+                            <div class="font-mono text-[#00ff88] text-sm mb-2"><span class="text-gray-500">//</span> Experience</div>
+
+                            <div class="space-y-5">
+                                <div>
+                                    <div class="flex flex-wrap justify-between items-start gap-3">
+                                        <div class="text-white font-semibold">Test Engineer - Red Teaming <span class="text-gray-500">—</span> <span class="text-[#00d4ff]">InTeleCyber Services</span></div>
+                                        <div class="font-mono text-gray-500 text-sm">Apr 2025 - Present</div>
+                                    </div>
+                                    <ul class="list-disc list-inside text-gray-300 mt-2 space-y-1">
+                                        <li>Completed 4+ security audits, including VAPT of medical devices, mobile applications (IAS – UL 2900-2-1), and IP routers/Wi‑Fi CPEs (NCCS – ITSAR standards).</li>
+                                        <li>Created and executed test plans for assessing functionality, performance, and security of IoT and network devices.</li>
+                                        <li>Discovered vulnerabilities in web apps, APIs, and embedded systems using Nessus, Burp Suite, Nmap, Wireshark, and OWASP ZAP.</li>
+                                        <li>Conducted fuzzing tests on devices according to requirements.</li>
+                                    </ul>
+                                </div>
+
+                                <div>
+                                    <div class="flex flex-wrap justify-between items-start gap-3">
+                                        <div class="text-white font-semibold">Cyber Security Data Analyst <span class="text-gray-500">—</span> <span class="text-[#00d4ff]">SecurityHQ</span> <span class="text-gray-500 text-sm">(Pune, India)</span></div>
+                                        <div class="font-mono text-gray-500 text-sm">Jan 2022 - Jan 2023</div>
+                                    </div>
+                                    <ul class="list-disc list-inside text-gray-300 mt-2 space-y-1">
+                                        <li>Achieved <span class="text-white font-semibold">Top Performer</span> recognition for two consecutive quarters by consistently demonstrating exceptional initiatives.</li>
+                                        <li>Configured IBM QRadar and Microsoft Azure Sentinel (SPL/KQL) for SIEM, security monitoring, incident analysis, and incident response/handling procedures.</li>
+                                        <li>Developed and managed dashboards using QlikView, Power BI, and MS Excel, enhancing EDR/MDR reporting efficiency by <span class="text-white font-semibold">40%</span> and ensuring 100% adherence to SLAs/KPIs.</li>
+                                        <li>Applied industry best practices and standards for information security, business continuity, and disaster recovery.</li>
+                                        <li>Worked independently to prioritize tasks and meet multiple deadlines in high-pressure situations, reducing stakeholder security risk.</li>
+                                        <li>Collaborated with cross-functional teams to create a responsive incident response system, decreasing downtime by <span class="text-white font-semibold">25%</span>.</li>
+                                    </ul>
+                                </div>
+
+                                <div>
+                                    <div class="flex flex-wrap justify-between items-start gap-3">
+                                        <div class="text-white font-semibold">Cyber Forensic Analyst Trainee <span class="text-gray-500">—</span> <span class="text-[#00d4ff]">FORnSEC Solutions</span> <span class="text-gray-500 text-sm">(Nagpur, India)</span></div>
+                                        <div class="font-mono text-gray-500 text-sm">Oct 2020 - Apr 2021</div>
+                                    </div>
+                                    <ul class="list-disc list-inside text-gray-300 mt-2 space-y-1">
+                                        <li>Investigated 25+ legal cases across government and private sectors (including murder, divorce litigation, and employment fraud), supporting evidence-based legal proceedings.</li>
+                                        <li>Extracted and analyzed digital evidence using RecoverIt, Autopsy, and ProDiscover, improving forensic investigation efficiency by <span class="text-white font-semibold">30%</span>.</li>
+                                        <li>Ensured 100% evidence integrity by strictly following chain-of-custody protocols, including cloud data preservation.</li>
+                                        <li>Conducted investigative research, data/evidence collection, and analysis to assist legal teams with process improvement and business requirements.</li>
+                                        <li>Collaborated with clients, attorneys, and law enforcement to present critical issues during legal procedures.</li>
+                                        <li>Created technical documentation ensuring 100% compliance with forensic standards and regulatory guidelines.</li>
+                                        <li>Enhanced enterprise online presence by editing and optimizing 10+ YouTube videos, increasing engagement by 35%.</li>
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div>
+                            <div class="font-mono text-[#00ff88] text-sm mb-2"><span class="text-gray-500">//</span> Education</div>
+                            <div class="space-y-3 text-gray-300">
+                                <div>
+                                    <div class="text-white font-semibold">Master's in Cybersecurity <span class="text-gray-500">—</span> Birmingham City University</div>
+                                    <div class="text-gray-500 text-sm">Birmingham, United Kingdom • 01/2023 - 01/2024</div>
+                                </div>
+                                <div>
+                                    <div class="text-white font-semibold">Bachelor of Engineering in Computer Science <span class="text-gray-500">—</span> Priyadarshini College of Engineering</div>
+                                    <div class="text-gray-500 text-sm">Nagpur, India • 06/2016 - 04/2020</div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <aside class="space-y-5">
+                        <div class="p-4 rounded-lg bg-white/5 border border-white/10">
+                            <div class="text-gray-400 text-xs mb-1">Certification</div>
+                            <div class="text-white font-semibold">Certified Ethical Hacker (CEH)</div>
+                            <div class="text-gray-400 text-sm">EC-Council • 2025</div>
+                            <div class="font-mono text-xs text-gray-500 mt-1">Cred. ID: ECC3216487509</div>
+                        </div>
+
+                        <div class="p-4 rounded-lg bg-white/5 border border-white/10">
+                            <div class="text-gray-400 text-xs mb-2">Skills (Snapshot)</div>
+                            <div class="flex flex-wrap gap-2">
+                                <span class="px-2 py-1 rounded text-xs bg-white/5 border border-white/10 text-gray-200">Burp Suite</span>
+                                <span class="px-2 py-1 rounded text-xs bg-white/5 border border-white/10 text-gray-200">Nessus</span>
+                                <span class="px-2 py-1 rounded text-xs bg-white/5 border border-white/10 text-gray-200">Defensics</span>
+                                <span class="px-2 py-1 rounded text-xs bg-white/5 border border-white/10 text-gray-200">Wireshark</span>
+                                <span class="px-2 py-1 rounded text-xs bg-white/5 border border-white/10 text-gray-200">Nmap</span>
+                                <span class="px-2 py-1 rounded text-xs bg-white/5 border border-white/10 text-gray-200">Metasploit</span>
+                                <span class="px-2 py-1 rounded text-xs bg-white/5 border border-white/10 text-gray-200">QRadar</span>
+                                <span class="px-2 py-1 rounded text-xs bg-white/5 border border-white/10 text-gray-200">Azure Sentinel</span>
+                                <span class="px-2 py-1 rounded text-xs bg-white/5 border border-white/10 text-gray-200">TCP/IP</span>
+                                <span class="px-2 py-1 rounded text-xs bg-white/5 border border-white/10 text-gray-200">DNS</span>
+                                <span class="px-2 py-1 rounded text-xs bg-white/5 border border-white/10 text-gray-200">Pen Testing</span>
+                                <span class="px-2 py-1 rounded text-xs bg-white/5 border border-white/10 text-gray-200">SOC</span>
+                                <span class="px-2 py-1 rounded text-xs bg-white/5 border border-white/10 text-gray-200">GRC</span>
+                            </div>
+                        </div>
+
+                        <div class="p-4 rounded-lg bg-white/5 border border-white/10">
+                            <div class="text-gray-400 text-xs mb-2">Projects (Highlights)</div>
+                            <ul class="text-gray-300 text-sm list-disc list-inside space-y-1">
+                                <li>Enterprise Application Pentest</li>
+                                <li>Mobile App Security (Android)</li>
+                                <li>Privacy Risk Assessment in IoT Data Collection (NIST CSF)</li>
+                            </ul>
+                            <div class="text-gray-500 text-xs mt-3">Note: client-identifying details are omitted.</div>
+                        </div>
+                    </aside>
+                </div>
+
+                <div class="mt-6 flex flex-col sm:flex-row justify-end gap-3">
+                    <button id="print-resume" class="px-4 py-2 rounded border border-[#00d4ff]/60 text-[#00d4ff] hover:bg-[#00d4ff]/10 transition font-semibold">
+                        <i class="fas fa-print mr-2" aria-hidden="true"></i>Print / Save PDF
+                    </button>
+                    <button id="resume-modal-close-2" class="px-4 py-2 rounded bg-[#00ff88] text-black font-semibold hover:bg-[#00d4ff] transition">Close</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Printable Resume (for Print / Save PDF) -->
+    <div id="resume-printable">
+        <h1>ANUSHREE BHUSARI</h1>
+        <div class="subhead">CEH Certified | Cyber Security Test Engineer</div>
+        <div class="subhead">anushrebhusari24@gmail.com • linkedin.com/in/anushree-bhusari24 • India</div>
+        <hr>
+
+        <h2>Summary</h2>
+        <p>Cybersecurity professional with 1.5 years of experience in Security Data Analytics and Digital Forensics. CEH-certified with expertise in threat detection, network analysis, and incident response. Seeking opportunities to apply my skills and strengthen information technology defences.</p>
+
+        <h2>Experience</h2>
+        <h3>Test Engineer - Red Teaming — InTeleCyber Services (Apr 2025 - Present)</h3>
+        <ul>
+            <li>Completed 4+ security audits, including VAPT of medical devices, mobile applications (IAS – UL 2900-2-1), and IP routers/Wi-Fi CPEs (NCCS – ITSAR standards).</li>
+            <li>Created and executed test plans for assessing functionality, performance, and security of IoT and network devices.</li>
+            <li>Discovered vulnerabilities in web apps, APIs, and embedded systems using Nessus, Burp Suite, Nmap, Wireshark, and OWASP ZAP.</li>
+            <li>Conducted fuzzing tests on devices according to requirements.</li>
+        </ul>
+
+        <h3>Cyber Security Data Analyst — SecurityHQ (Jan 2022 - Jan 2023) • Pune, India</h3>
+        <ul>
+            <li>Achieved “Top Performer” recognition for two consecutive quarters by consistently demonstrating exceptional initiatives.</li>
+            <li>Configured IBM QRadar and Microsoft Azure Sentinel (SPL/KQL) for SIEM, security monitoring, incident analysis, and incident response/handling procedures.</li>
+            <li>Developed and managed dashboards using QlikView, Power BI, and MS Excel, enhancing EDR/MDR reporting efficiency by 40% and ensuring 100% adherence to SLAs and KPIs.</li>
+            <li>Applied industry best practices and standards for information security, business continuity, and disaster recovery.</li>
+            <li>Worked independently prioritizing tasks to meet multiple deadlines in high-pressure situations, reducing stakeholder security risk.</li>
+            <li>Collaborated with cross-functional teams to create a responsive incident response system, decreasing downtime by 25%.</li>
+        </ul>
+
+        <h3>Cyber Forensic Analyst Trainee — FORnSEC Solutions (Oct 2020 - Apr 2021) • Nagpur, India</h3>
+        <ul>
+            <li>Investigated 25+ legal cases in government and private sectors, including murder, divorce litigation, and employment fraud, aiding in evidence-based legal proceedings.</li>
+            <li>Extracted and analyzed digital evidence using RecoverIt, Autopsy, and ProDiscover, improving forensic investigation efficiency by 30%.</li>
+            <li>Ensured 100% evidence integrity by strictly following chain-of-custody protocols, including cloud data preservation.</li>
+            <li>Conducted investigative research, data/evidence collection, and analysis to assist legal teams with process improvement and business requirements.</li>
+            <li>Collaborated with clients, attorneys, and law enforcement to present critical issues during legal procedures.</li>
+            <li>Created technical documentation ensuring 100% compliance with forensic standards and regulatory guidelines.</li>
+            <li>Enhanced enterprise online presence by editing and optimizing 10+ YouTube videos, increasing engagement by 35%.</li>
+        </ul>
+
+        <h2>Education</h2>
+        <h3>Master's in Cybersecurity — Birmingham City University (01/2023 - 01/2024)</h3>
+        <p>Birmingham, United Kingdom</p>
+        <h3>Bachelor of Engineering in Computer Science — Priyadarshini College of Engineering (06/2016 - 04/2020)</h3>
+        <p>Nagpur, India</p>
+
+        <h2>Projects</h2>
+        <h3>Enterprise Application Pentest</h3>
+        <p>Conducted comprehensive VAPT for a well known Original Equipment Manufacturer. Identified 5-8 critical vulnerabilities including XSS, Command Injection and privilege escalation. Along with this other network vulnerabilities were also a part of my findings.</p>
+        <h3>Mobile App Security</h3>
+        <p>Performed security assessment of Android application of a ECG Medical Device. Discovered insecure data storage and insecure cryptography.</p>
+        <h3>Privacy Risk Assessment in IoT Data Collection</h3>
+        <p>Assessed IoT privacy risks using the NIST Cybersecurity Framework (NIST CSF). Developed and applied a comprehensive risk assessment framework and used Wireshark to analyze traffic between IoT devices and servers to identify potential vulnerabilities and evaluate impact.</p>
+
+        <h2>Certification</h2>
+        <p><strong>Certified Ethical Hacker (CEH)</strong> — EC-Council (2025) • Cred. ID: ECC3216487509</p>
+
+        <h2>Achievements</h2>
+        <ul>
+            <li><strong>Excellence in Performance:</strong> Recognized as a Top Performer for two consecutive quarters for driving 20%+ improvement in security operations efficiency and consistently exceeding performance benchmarks.</li>
+            <li><strong>VP, Entrepreneurship Development Cell:</strong> Appointed through a competitive interview process involving 50+ students from diverse academic backgrounds.</li>
+            <li><strong>Leadership & Professional Growth:</strong> Designed workshops and networking events fostering growth, innovative thinking, teamwork, interpersonal skills, and continuous improvement.</li>
+        </ul>
+
+        <h2>Skills</h2>
+        <p><strong>Security Tools:</strong> Burp Suite, Nessus, Defensics, Wireshark, Nmap, Metasploit</p>
+        <p><strong>Networking:</strong> TCP/IP, Firewalls, VPN, DNS</p>
+        <p><strong>Programming:</strong> C, C++, Java</p>
+        <p><strong>SIEM & Monitoring:</strong> QRadar, Azure Sentinel (SPL/KQL), QlikSense</p>
+        <p><strong>Domains:</strong> Pen Testing, SOC, GRC</p>
+    </div>
+
+    <!-- Project Modal -->
+    <div id="project-modal" class="fixed inset-0 z-[60] hidden" role="dialog" aria-modal="true" aria-label="Project details">
+        <div id="project-modal-overlay" class="absolute inset-0 bg-black/70"></div>
+        <div class="relative max-w-2xl mx-auto mt-24 sm:mt-28 px-4">
+            <div class="cyber-card rounded-lg p-6">
+                <div class="flex items-start justify-between gap-4">
+                    <div>
+                        <div class="font-mono text-sm text-gray-500 mb-2">
+                            <span class="text-[#00ff88]">anushree@portfolio</span>:<span class="text-[#00d4ff]">~/projects</span>$ less details.md
+                        </div>
+                        <h3 id="modal-title" class="text-2xl font-bold"></h3>
+                    </div>
+                    <button id="project-modal-close" class="text-gray-300 hover:text-[#00ff88] transition" aria-label="Close">
+                        <i class="fas fa-xmark text-xl" aria-hidden="true"></i>
+                    </button>
+                </div>
+
+                <div id="modal-body" class="mt-4 text-gray-300 leading-relaxed"></div>
+
+                <div id="modal-tags" class="mt-5 flex flex-wrap gap-2"></div>
+
+                <div class="mt-6 flex justify-end">
+                    <button id="project-modal-close-2" class="px-4 py-2 rounded bg-[#00ff88] text-black font-semibold hover:bg-[#00d4ff] transition">Close</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Toast -->
+    <div id="toast" class="fixed bottom-6 left-1/2 -translate-x-1/2 z-[70] hidden">
+        <div class="px-4 py-2 rounded bg-black/80 border border-[#00ff88]/30 text-gray-100 text-sm">
+            <span id="toast-text">Copied!</span>
+        </div>
+    </div>
+
+    <script>
+        // Footer year
+        document.getElementById('year').textContent = new Date().getFullYear();
+
+        // Mobile menu toggle
+        const mobileMenuBtn = document.getElementById('mobile-menu-btn');
+        const mobileMenu = document.getElementById('mobile-menu');
+
+        function setMobileExpanded(expanded) {
+            mobileMenuBtn.setAttribute('aria-expanded', expanded ? 'true' : 'false');
+        }
+
+        mobileMenuBtn.addEventListener('click', () => {
+            const willShow = mobileMenu.classList.contains('hidden');
+            mobileMenu.classList.toggle('hidden');
+            setMobileExpanded(willShow);
+        });
+
+        // Smooth scroll for internal anchors
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                const href = this.getAttribute('href');
+                const target = document.querySelector(href);
+                if (!target) return;
+                e.preventDefault();
+                target.scrollIntoView({ behavior: 'smooth', block: 'start' });
+                mobileMenu.classList.add('hidden');
+                setMobileExpanded(false);
+            });
+        });
+
+        // Typing effect
+        const roles = [
+            'Cyber Security Test Engineer',
+            'CEH Certified Professional',
+            'Red Teaming (VAPT)',
+            'Security Data Analyst (SIEM)',
+            'Digital Forensics'
+        ];
+
+        const typingElement = document.getElementById('typing-text');
+        let roleIndex = 0;
+        let charIndex = 0;
+        let isDeleting = false;
+
+        const prefersReducedMotion = window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+        function typeEffect() {
+            if (!typingElement) return;
+            if (prefersReducedMotion) {
+                typingElement.textContent = roles[0];
+                return;
+            }
+
+            const currentRole = roles[roleIndex];
+
+            if (isDeleting) {
+                typingElement.textContent = currentRole.substring(0, Math.max(0, charIndex - 1));
+                charIndex--;
+            } else {
+                typingElement.textContent = currentRole.substring(0, charIndex + 1);
+                charIndex++;
+            }
+
+            let typeSpeed = isDeleting ? 50 : 90;
+
+            if (!isDeleting && charIndex === currentRole.length) {
+                typeSpeed = 1400;
+                isDeleting = true;
+            } else if (isDeleting && charIndex <= 0) {
+                isDeleting = false;
+                roleIndex = (roleIndex + 1) % roles.length;
+                typeSpeed = 350;
+            }
+
+            setTimeout(typeEffect, typeSpeed);
+        }
+
+        typeEffect();
+
+        // Matrix rain effect
+        const canvas = document.getElementById('matrix-bg');
+        const ctx = canvas.getContext('2d');
+
+        const chars = '01ABCDEFGHIJKLMNOPQRSTUVWXYZアイウエオカキクケコサシスセソタチツテトナニヌネノ';
+        const charArray = chars.split('');
+        const fontSize = 14;
+
+        let drops = [];
+        let matrixTimer = null;
+
+        function initMatrix() {
+            canvas.width = window.innerWidth;
+            canvas.height = window.innerHeight;
+            const columns = Math.floor(canvas.width / fontSize);
+            drops = new Array(columns).fill(1);
+        }
+
+        function drawMatrix() {
+            ctx.fillStyle = 'rgba(10, 15, 26, 0.06)';
+            ctx.fillRect(0, 0, canvas.width, canvas.height);
+
+            ctx.fillStyle = '#00ff88';
+            ctx.font = fontSize + 'px monospace';
+
+            for (let i = 0; i < drops.length; i++) {
+                const text = charArray[Math.floor(Math.random() * charArray.length)];
+                ctx.fillText(text, i * fontSize, drops[i] * fontSize);
+
+                if (drops[i] * fontSize > canvas.height && Math.random() > 0.975) {
+                    drops[i] = 0;
+                }
+                drops[i]++;
+            }
+        }
+
+        function startMatrix() {
+            if (prefersReducedMotion) return;
+            initMatrix();
+            if (matrixTimer) clearInterval(matrixTimer);
+            matrixTimer = setInterval(drawMatrix, 55);
+        }
+
+        startMatrix();
+
+        window.addEventListener('resize', () => {
+            initMatrix();
+        });
+
+        // Project modal
+        const projectDetails = {
+            enterprise: {
+                title: 'Enterprise Application Pentest',
+                body: `Conducted comprehensive VAPT for a well known Original Equipment Manufacturer (OEM). Identified approximately 5–8 critical vulnerabilities including XSS, Command Injection, and Privilege Escalation.\n\nIn addition to application findings, supporting network vulnerabilities were also assessed and documented to provide a complete view of risk across the environment.`,
+                tags: ['VAPT', 'Web App', 'XSS', 'Command Injection', 'Privilege Escalation']
+            },
+            mobile: {
+                title: 'Mobile App Security (Android)',
+                body: `Performed a security assessment of an Android application for an ECG medical device. Identified issues including insecure data storage and insecure cryptography.\n\nDocumented findings with runnable reproduction steps and prioritized remediation guidance suitable for engineering teams working under device security constraints.`,
+                tags: ['Android', 'Medical Device', 'Insecure Storage', 'Cryptography']
+            },
+            iot: {
+                title: 'IoT Privacy Risk Assessment in IoT Data Collection',
+                body: `Assessed IoT privacy risks using the NIST Cybersecurity Framework (NIST CSF). Developed and applied a risk assessment framework to evaluate IoT case studies and assets, enabling risk management strategies to mitigate privacy risks.\n\nUsed Wireshark to intercept and analyze network traffic between IoT devices and servers, identifying potential issues and evaluating impact. This helped improve security policies and alignment with industry standards.`,
+                tags: ['NIST CSF', 'IoT', 'Wireshark', 'Privacy Risk', 'Risk Framework']
+            }
+        };
+
+        const modal = document.getElementById('project-modal');
+        const modalOverlay = document.getElementById('project-modal-overlay');
+        const modalClose = document.getElementById('project-modal-close');
+        const modalClose2 = document.getElementById('project-modal-close-2');
+        const modalTitle = document.getElementById('modal-title');
+        const modalBody = document.getElementById('modal-body');
+        const modalTags = document.getElementById('modal-tags');
+
+        let lastFocusedEl = null;
+
+        function openModal(key) {
+            const data = projectDetails[key];
+            if (!data) return;
+
+            lastFocusedEl = document.activeElement;
+
+            modalTitle.textContent = data.title;
+            modalBody.textContent = data.body;
+
+            modalTags.innerHTML = '';
+            data.tags.forEach(tag => {
+                const span = document.createElement('span');
+                span.className = 'px-2 py-1 rounded text-xs bg-white/5 border border-white/10 text-gray-200';
+                span.textContent = tag;
+                modalTags.appendChild(span);
+            });
+
+            modal.classList.remove('hidden');
+            document.body.style.overflow = 'hidden';
+            modalClose.focus();
+        }
+
+        function closeModal() {
+            modal.classList.add('hidden');
+            document.body.style.overflow = '';
+            if (lastFocusedEl && typeof lastFocusedEl.focus === 'function') lastFocusedEl.focus();
+        }
+
+        document.querySelectorAll('.project-details').forEach(btn => {
+            btn.addEventListener('click', () => openModal(btn.dataset.project));
+        });
+
+        modalOverlay.addEventListener('click', closeModal);
+        modalClose.addEventListener('click', closeModal);
+        modalClose2.addEventListener('click', closeModal);
+
+        document.addEventListener('keydown', (e) => {
+            if (e.key === 'Escape' && !modal.classList.contains('hidden')) closeModal();
+        });
+
+        // Copy email
+        const copyBtn = document.getElementById('copy-email');
+        const emailText = document.getElementById('email-text');
+        const toast = document.getElementById('toast');
+        const toastText = document.getElementById('toast-text');
+
+        function showToast(message) {
+            toastText.textContent = message;
+            toast.classList.remove('hidden');
+            clearTimeout(showToast._t);
+            showToast._t = setTimeout(() => toast.classList.add('hidden'), 1400);
+        }
+
+        copyBtn.addEventListener('click', async () => {
+            const email = (emailText?.textContent || '').trim();
+            if (!email) return;
+
+            try {
+                await navigator.clipboard.writeText(email);
+                showToast('Copied email to clipboard');
+            } catch {
+                // Fallback
+                const ta = document.createElement('textarea');
+                ta.value = email;
+                document.body.appendChild(ta);
+                ta.select();
+                document.execCommand('copy');
+                ta.remove();
+                showToast('Copied email to clipboard');
+            }
+        });
+
+
+        // Resume modal
+        const openResumeBtn = document.getElementById('open-resume');
+        const resumeModal = document.getElementById('resume-modal');
+        const resumeOverlay = document.getElementById('resume-modal-overlay');
+        const resumeClose = document.getElementById('resume-modal-close');
+        const resumeClose2 = document.getElementById('resume-modal-close-2');
+        const printResume = document.getElementById('print-resume');
+
+        let lastFocusedResumeEl = null;
+
+        function openResumeModal() {
+            if (!resumeModal) return;
+            lastFocusedResumeEl = document.activeElement;
+            resumeModal.classList.remove('hidden');
+            document.body.style.overflow = 'hidden';
+            resumeClose?.focus();
+        }
+
+        function closeResumeModal() {
+            if (!resumeModal) return;
+            resumeModal.classList.add('hidden');
+            document.body.style.overflow = '';
+            if (lastFocusedResumeEl && typeof lastFocusedResumeEl.focus === 'function') lastFocusedResumeEl.focus();
+        }
+
+        openResumeBtn?.addEventListener('click', openResumeModal);
+        resumeOverlay?.addEventListener('click', closeResumeModal);
+        resumeClose?.addEventListener('click', closeResumeModal);
+        resumeClose2?.addEventListener('click', closeResumeModal);
+
+        function startPrintResume() {
+            document.body.classList.add('printing-resume');
+            // Give the browser a moment to apply styles before opening the print dialog.
+            setTimeout(() => window.print(), 60);
+        }
+
+        printResume?.addEventListener('click', startPrintResume);
+
+        window.addEventListener('afterprint', () => {
+            document.body.classList.remove('printing-resume');
+        });
+
+        document.addEventListener('keydown', (e) => {
+            if (e.key === 'Escape' && resumeModal && !resumeModal.classList.contains('hidden')) {
+                closeResumeModal();
+            }
+        });
+    </script>
+<script defer src="https://static.cloudflareinsights.com/beacon.min.js/vcd15cbe7772f49c399c6a5babf22c1241717689176015" integrity="sha512-ZpsOmlRQV6y907TI0dKBHq9Md29nnaEIPlkf84rnaERnq6zvWvPUqr2ft8M1aS28oN72PdrCzSjY4U6VaAw1EQ==" data-cf-beacon='{"version":"2024.11.0","token":"cfb6543e268d4ceb92c8170675caa481","r":1,"server_timing":{"name":{"cfCacheStatus":true,"cfEdge":true,"cfExtPri":true,"cfL4":true,"cfOrigin":true,"cfSpeedBrain":true},"location_startswith":null}}' crossorigin="anonymous"></script>
+</body>
+</html>
